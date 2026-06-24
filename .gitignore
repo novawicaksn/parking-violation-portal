@@ -1,0 +1,9 @@
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+tmp/
+.gocache/
+.npm-cache/
+frontend/tsconfig.tsbuildinfo
+.DS_Store
+Thumbs.db
