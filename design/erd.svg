@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <rect width="100%" height="100%" fill="#08111f"/>
+  <text x="40" y="50" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="28" font-weight="700">ERD</text>
+  <rect x="40" y="70" width="220" height="120" rx="14" fill="#0f172a" stroke="#38bdf8"/>
+  <text x="150" y="105" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="700">USERS</text>
+  <text x="150" y="130" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">id PK</text>
+  <text x="150" y="150" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">name, role, plate</text>
+  <text x="150" y="170" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">balance_cents</text>
+  <rect x="340" y="70" width="220" height="120" rx="14" fill="#111827" stroke="#a78bfa"/>
+  <text x="450" y="105" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="700">RULE_VERSIONS</text>
+  <text x="450" y="130" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">id PK, version UK</text>
+  <text x="450" y="150" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">active, rules jsonb</text>
+  <rect x="650" y="40" width="270" height="170" rx="14" fill="#1e293b" stroke="#22c55e"/>
+  <text x="785" y="75" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="700">VIOLATIONS</text>
+  <text x="785" y="102" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">id PK, plate, violation_type</text>
+  <text x="785" y="122" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">fine_cents, status</text>
+  <text x="785" y="142" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">rule_version_id FK</text>
+  <text x="785" y="162" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">rule_version_number</text>
+  <text x="785" y="182" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">rule_snapshot jsonb</text>
+  <rect x="650" y="250" width="270" height="150" rx="14" fill="#1e293b" stroke="#fb7185"/>
+  <text x="785" y="285" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="700">PAYMENTS</text>
+  <text x="785" y="310" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">id PK, violation_id FK</text>
+  <text x="785" y="330" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">member_user_id FK</text>
+  <text x="785" y="350" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">amount_cents, scenario</text>
+  <text x="785" y="370" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">status, transaction_id</text>
+  <rect x="950" y="250" width="240" height="150" rx="14" fill="#1e293b" stroke="#fbbf24"/>
+  <text x="1070" y="285" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="700">NOTIFICATIONS</text>
+  <text x="1070" y="310" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">id PK, violation_id FK</text>
+  <text x="1070" y="330" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">user_id FK</text>
+  <text x="1070" y="350" fill="#f8fafc" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">kind, message, status</text>
+  <line x1="260" y1="130" x2="650" y2="120" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <line x1="560" y1="130" x2="650" y2="120" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <line x1="785" y1="210" x2="785" y2="250" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <line x1="920" y1="170" x2="950" y2="290" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow2)"/>
+  <text x="650" y="430" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14">Snapshot fields on VIOLATIONS make past fines immutable even if RULE_VERSIONS changes.</text>
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

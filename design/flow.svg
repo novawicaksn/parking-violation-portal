@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <rect width="100%" height="100%" fill="#08111f"/>
+  <text x="40" y="50" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="28" font-weight="700">Data Flow Diagram</text>
+  <rect x="40" y="120" width="180" height="80" rx="14" fill="#0f172a" stroke="#38bdf8"/>
+  <text x="130" y="155" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">React Web App</text>
+  <text x="130" y="175" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Officer + Member</text>
+  <rect x="270" y="120" width="190" height="80" rx="14" fill="#111827" stroke="#f59e0b"/>
+  <text x="365" y="155" fill="#f9fafb" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">API Gateway</text>
+  <text x="365" y="175" fill="#f9fafb" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Single entrypoint</text>
+  <rect x="540" y="40" width="160" height="70" rx="14" fill="#1e293b" stroke="#a78bfa"/>
+  <text x="620" y="80" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Rule Service</text>
+  <rect x="540" y="130" width="180" height="80" rx="14" fill="#1e293b" stroke="#22c55e"/>
+  <text x="630" y="164" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Violation Service</text>
+  <text x="630" y="184" fill="#f8fafc" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">fine calc + snapshot</text>
+  <rect x="540" y="240" width="170" height="80" rx="14" fill="#1e293b" stroke="#fb7185"/>
+  <text x="625" y="275" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Payment Service</text>
+  <text x="625" y="295" fill="#f8fafc" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">mock charge</text>
+  <rect x="540" y="350" width="170" height="70" rx="14" fill="#1e293b" stroke="#fbbf24"/>
+  <text x="625" y="391" fill="#f8fafc" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Notification Service</text>
+  <rect x="820" y="120" width="180" height="130" rx="14" fill="#0f172a" stroke="#94a3b8"/>
+  <text x="910" y="165" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">PostgreSQL</text>
+  <text x="910" y="188" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">rules, violations,</text>
+  <text x="910" y="208" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">payments, notifications</text>
+  <line x1="220" y1="160" x2="270" y2="160" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="460" y1="160" x2="540" y2="75" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="460" y1="160" x2="540" y2="170" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="460" y1="160" x2="540" y2="280" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="460" y1="160" x2="540" y2="385" stroke="#94a3b8" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="700" y1="75" x2="820" y2="165" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="720" y1="170" x2="820" y2="180" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="710" y1="280" x2="820" y2="210" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="710" y1="385" x2="820" y2="225" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="625" y1="210" x2="625" y2="350" stroke="#fbbf24" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+  <text x="760" y="330" fill="#fbbf24" font-family="Arial, sans-serif" font-size="13">async notification event</text>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+</svg>

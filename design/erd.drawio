@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" modified="2026-06-24T16:40:00.000Z" agent="GitHub Copilot" version="24.7.17" type="device">
+  <diagram id="parking-erd" name="ERD">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="USERS&lt;br/&gt;id PK&lt;br/&gt;name&lt;br/&gt;role&lt;br/&gt;plate&lt;br/&gt;balance_cents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0f172a;strokeColor=#38bdf8;fontColor=#e2e8f0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="RULE_VERSIONS&lt;br/&gt;id PK&lt;br/&gt;version UK&lt;br/&gt;active&lt;br/&gt;rules jsonb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#a78bfa;fontColor=#f8fafc;" vertex="1" parent="1">
+          <mxGeometry x="340" y="70" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="VIOLATIONS&lt;br/&gt;id PK&lt;br/&gt;plate&lt;br/&gt;violation_type&lt;br/&gt;fine_cents&lt;br/&gt;rule_version_id FK&lt;br/&gt;rule_version_number&lt;br/&gt;rule_snapshot jsonb&lt;br/&gt;status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#22c55e;fontColor=#f8fafc;" vertex="1" parent="1">
+          <mxGeometry x="650" y="40" width="270" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="PAYMENTS&lt;br/&gt;id PK&lt;br/&gt;violation_id FK&lt;br/&gt;member_user_id FK&lt;br/&gt;amount_cents&lt;br/&gt;scenario&lt;br/&gt;status&lt;br/&gt;transaction_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#fb7185;fontColor=#f8fafc;" vertex="1" parent="1">
+          <mxGeometry x="650" y="250" width="270" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="NOTIFICATIONS&lt;br/&gt;id PK&lt;br/&gt;violation_id FK&lt;br/&gt;user_id FK&lt;br/&gt;kind&lt;br/&gt;message&lt;br/&gt;status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#fbbf24;fontColor=#f8fafc;" vertex="1" parent="1">
+          <mxGeometry x="950" y="250" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="1 member owns many violations" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#94a3b8;" edge="1" parent="1" source="2" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="one active rule version is snapshotted per violation" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#94a3b8;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="one violation has at most one payment" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#94a3b8;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="one violation can emit notifications" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#94a3b8;" edge="1" parent="1" source="4" target="6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="member pays from account balance" style="text;html=1;align=left;verticalAlign=top;fontSize=12;fillColor=none;strokeColor=none;fontColor=#e2e8f0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="420" width="330" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
