@@ -1,130 +1,333 @@
 # Parking Violation Portal
 
-Working slice for the Tan Digital assignment. The repository includes:
+Parking Violation Portal adalah aplikasi web untuk simulasi pengelolaan pelanggaran parkir. Project ini dibuat sebagai bagian dari Tan Digital Assignment menggunakan arsitektur frontend dan backend yang terpisah.
 
-- `backend` in Go (API gateway and modular services in code boundaries)
-- `frontend` in React + TypeScript
-- PostgreSQL as storage
+## Tech Stack
 
-## What this slice covers
+### Backend
+- Go 1.22+
+- PostgreSQL
+- REST API
 
-1. Officer submits a violation with plate, violation type, location, timestamp, photo.
-2. System calculates fine from currently active rule version.
-3. Officer can publish a new rule version.
-4. Member pays a fine using mocked payment scenarios (`success` or `failed`).
-5. Transaction history shows each violation with the fine and the applied rule version snapshot.
+### Frontend
+- React
+- TypeScript
+- Vite
 
-## Architecture at a glance
+### Database
+- PostgreSQL 14+
 
-- Single frontend talks only to API gateway (`backend/cmd/api/main.go`).
-- Gateway coordinates module-like service boundaries inside backend:
-  - Rule service (rule versions, active rules)
-  - Violation service (submission, fine calculation)
-  - Payment service (mock charge + account deduction)
-  - Notification service (invoice notification record)
-- PostgreSQL stores source-of-truth and immutable rule snapshots per violation.
+---
 
-## Prerequisites
+# Features
 
-- Go `1.22+`
-- Node.js `20+`
-- PostgreSQL `14+`
+- Officer membuat data pelanggaran parkir
+- Perhitungan denda berdasarkan rule aktif
+- Publish versi rule baru
+- Member membayar denda (Mock Payment)
+- Riwayat transaksi pelanggaran
+- Rule Version Snapshot
+- Dashboard Officer & Member
 
-## Run locally
+---
 
-### 1) Start PostgreSQL
+# Project Structure
 
-You can use local PostgreSQL or Docker. Example with Docker:
-
-```bash
-docker run --name parking-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=parking_violation -p 5432:5432 -d postgres:16
+```
+parking-violation-portal
+│
+├── backend
+│   ├── cmd
+│   ├── internal
+│   ├── go.mod
+│   └── ...
+│
+├── frontend
+│   ├── src
+│   ├── public
+│   ├── package.json
+│   └── ...
+│
+├── design
+│
+└── README.md
 ```
 
-If you already have PostgreSQL installed locally, make sure it is running and that the `parking_violation` database exists.
+---
 
-### 2) Run backend
+# Prerequisites
 
-From `backend`:
+Install terlebih dahulu:
+
+- Go 1.22+
+- Node.js 20+
+- Docker Desktop (opsional)
+- PostgreSQL 14+
+
+---
+
+# Menjalankan Database
+
+## Menggunakan Docker
+
+```bash
+docker run --name parking-postgres ^
+-e POSTGRES_PASSWORD=postgres ^
+-e POSTGRES_DB=parking_violation ^
+-p 5432:5432 ^
+-d postgres:16
+```
+
+Cek apakah database sudah berjalan:
+
+```bash
+docker ps
+```
+
+Harus muncul container:
+
+```
+parking-postgres
+```
+
+---
+
+# Menjalankan Backend
+
+Masuk ke folder backend.
+
+```bash
+cd backend
+```
+
+Install dependency:
 
 ```bash
 go mod tidy
-go run ./cmd/api
 ```
 
-If the server fails with a connection error to `localhost:5432`, PostgreSQL is not running yet.
-If you already see `api gateway listening on :8080`, do not start a second backend instance on the same port. Stop the other process first, or set `API_ADDR=:8081` and use `VITE_API_URL=http://localhost:8081` on the frontend.
-If your terminal is already inside `D:\TKJ\parking-violation-portal\backend`, do not run `cd backend` again.
+Jalankan:
 
-Optional environment variables:
+```bash
+go run cmd/api/main.go
+```
 
-- `DATABASE_URL` (default: `postgres://postgres:postgres@localhost:5432/parking_violation?sslmode=disable`)
-- `API_ADDR` (default: `:8080`)
-- `FRONTEND_ORIGIN` (default: `http://localhost:5173`)
-- `SEED_OFFICER_ID` (default seeded UUID)
-- `SEED_MEMBER_ID` (default seeded UUID)
-- `SEED_MEMBER_PLATE` (default `B1234CD`)
-- `SEED_MEMBER_BALANCE` (default `1500000`)
+Jika berhasil akan muncul:
 
-### 3) Run frontend
+```
+api gateway listening on :8080
+```
 
-From `frontend`:
+---
+
+## Jika Port 8080 Sudah Dipakai
+
+Cek:
+
+```powershell
+netstat -ano | findstr :8080
+```
+
+Jika port digunakan aplikasi lain (misalnya Docker), jalankan backend di port lain.
+
+Windows PowerShell:
+
+```powershell
+$env:API_ADDR=":8081"
+go run cmd/api/main.go
+```
+
+Jika berhasil:
+
+```
+api gateway listening on :8081
+```
+
+---
+
+# Menjalankan Frontend
+
+Masuk ke folder frontend.
+
+```bash
+cd frontend
+```
+
+Install package:
 
 ```bash
 npm install
+```
+
+Jika backend berjalan di port **8080**:
+
+```bash
 npm run dev
 ```
 
-If you are currently inside `backend`, move back to the repository root first, then enter `frontend`:
+Frontend akan berjalan di
 
-```powershell
-Set-Location d:\TKJ\parking-violation-portal
-Set-Location .\frontend
+```
+http://localhost:5173
 ```
 
-If you are already at the repository root, go straight to `frontend` and skip the first command.
+---
 
-Optional env:
+## Jika Backend Menggunakan Port 8081
 
-- `VITE_API_URL` (default: `http://localhost:8080`)
+Sebelum menjalankan frontend:
 
-Open `http://localhost:5173`.
-
-### If the default ports are already in use
-
-This workspace has been verified with:
+Windows PowerShell
 
 ```powershell
-# terminal 1
-Set-Location d:\TKJ\parking-violation-portal\backend
-$env:API_ADDR=':8081'
-go run ./cmd/api
-
-# terminal 2
-Set-Location d:\TKJ\parking-violation-portal\frontend
-$env:VITE_API_URL='http://localhost:8081'
-npm run dev -- --port 5175 --strictPort
+$env:VITE_API_URL="http://localhost:8081"
+npm run dev
 ```
 
-Open `http://localhost:5175` in that case.
+atau buat file
 
-## Demo flow
+```
+frontend/.env
+```
 
-1. Choose `Officer One` account.
-2. Submit a violation (upload any image, pick time, type, location).
-3. Publish a new rule version from the rules panel.
-4. Switch to `Member One` account.
-5. In unpaid list, choose `success` or `failed`, then charge.
-6. Check transaction history table for applied rule version and status.
+isi:
 
-## Notes and trade-offs
+```
+VITE_API_URL=http://localhost:8081
+```
 
-- This slice keeps services modular inside one Go process to stay focused on the assignment scope.
-- Notification is represented as an async-friendly record; queue/broker can be introduced later.
-- Photo is stored as base64 text for simplicity. Object storage is a better production choice.
-- Rule versioning is immutable for issued violations using `rule_snapshot` and `rule_version_number`.
-- The required draw.io diagrams are included in [design/flow.drawio](design/flow.drawio), [design/flow.svg](design/flow.svg), [design/erd.drawio](design/erd.drawio), and [design/erd.svg](design/erd.svg).
+---
 
-## Security simplifications for assignment
+## Jika Port 5173 Sudah Dipakai
 
-- Authentication is mocked by selecting a user in UI and passing `X-User-ID`.
-- No production auth/session flow implemented.
+Misalnya digunakan Docker.
+
+Cek:
+
+```powershell
+netstat -ano | findstr :5173
+```
+
+atau
+
+```powershell
+docker ps
+```
+
+Jika ada container menggunakan 5173:
+
+```
+guyub-frontend
+```
+
+Stop:
+
+```powershell
+docker stop guyub-frontend
+```
+
+Atau jalankan frontend pada port lain:
+
+```bash
+npm run dev -- --port 5175
+```
+
+---
+
+# Default URL
+
+Backend
+
+```
+http://localhost:8080
+```
+
+atau
+
+```
+http://localhost:8081
+```
+
+Frontend
+
+```
+http://localhost:5173
+```
+
+atau
+
+```
+http://localhost:5175
+```
+
+---
+
+# API Test
+
+Membuka daftar user:
+
+```
+http://localhost:8080/api/users
+```
+
+atau
+
+```
+http://localhost:8081/api/users
+```
+
+Jika berhasil akan tampil JSON seperti:
+
+```json
+[
+  {
+    "name": "Member One"
+  },
+  {
+    "name": "Officer One"
+  }
+]
+```
+
+---
+
+# Demo
+
+1. Login sebagai **Officer One**
+2. Publish Rule
+3. Tambah Pelanggaran
+4. Ganti ke **Member One**
+5. Pilih metode pembayaran
+6. Bayar pelanggaran
+7. Lihat perubahan saldo
+8. Lihat riwayat transaksi
+
+---
+
+# Notes
+
+- Authentication masih menggunakan mock (`X-User-ID`).
+- Payment menggunakan simulasi (`success` dan `failed`).
+- Foto pelanggaran disimpan dalam format Base64.
+- Rule yang sudah digunakan pada pelanggaran tidak berubah meskipun terdapat rule baru.
+
+---
+
+# Design
+
+Diagram tersedia pada folder:
+
+```
+design/
+```
+
+- flow.drawio
+- flow.svg
+- erd.drawio
+- erd.svg
+
+---
+
+# Author
+
+Nova Putri Wicaksono

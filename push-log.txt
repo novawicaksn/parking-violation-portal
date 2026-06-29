@@ -1,0 +1,13 @@
+﻿git : Pushing to https://github.com/novawicaksn/parking-violation-portal
+At line:1 char:8
++ $log = git push --verbose -u origin on-portal 2>&1
++        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Pushing to http...iolation-portal 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+To https://github.com/novawicaksn/parking-violation-portal
+ = [up to date]      on-portal -> on-portal
+updating local tracking ref 'refs/remotes/origin/on-portal'
+Everything up-to-date
+branch 'on-portal' set up to track 'origin/on-portal'.

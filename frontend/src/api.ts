@@ -7,7 +7,7 @@ import type {
   ViolationInput,
 } from './types'
 
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080'
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8081'
 
 async function request<T>(path: string, options: RequestInit = {}, userId?: string): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {

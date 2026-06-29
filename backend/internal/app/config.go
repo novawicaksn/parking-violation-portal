@@ -19,7 +19,7 @@ type Config struct {
 func LoadConfig() Config {
 	return Config{
 		DatabaseURL:    getEnv("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/parking_violation?sslmode=disable"),
-		Address:        getEnv("API_ADDR", ":8080"),
+		Address: getEnv("API_ADDR", ":8081"),
 		FrontendOrigin: getEnv("FRONTEND_ORIGIN", "http://localhost:5173"),
 		OfficerID:      getEnv("SEED_OFFICER_ID", "11111111-1111-1111-1111-111111111111"),
 		MemberID:       getEnv("SEED_MEMBER_ID", "22222222-2222-2222-2222-222222222222"),
